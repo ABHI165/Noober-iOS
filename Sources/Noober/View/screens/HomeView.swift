@@ -11,40 +11,43 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                NoobTopAppBar(isSearching: $isSearching, text: $viewModel.searchText)
-                
-                if isSearching {
-                    SearchResultView(state: viewModel.filteredDataState, sendAction: viewModel.send)
-                        .transition(.move(edge: .trailing))
-                } else {
-                    NoobTabView(selection: $selectedTab) {
-                        
-                        APICallsTabView(state: viewModel.apiListState) {msg in
-                            viewModel.send(.tappedShare(msg: msg))
+            GeometryReader {proxy in
+                VStack {
+                    NoobTopAppBar(isSearching: $isSearching, text: $viewModel.searchText)
+                    
+                    if isSearching {
+                        SearchResultView(state: viewModel.filteredDataState, sendAction: viewModel.send)
+                            .transition(.move(edge: .trailing))
+                    } else {
+                        NoobTabView(selection: $selectedTab) {
+                            
+                            APICallsTabView(state: viewModel.apiListState) {msg in
+                                viewModel.send(.tappedShare(msg: msg))
+                            }
+                            .noobTabItem(.api, selection: $selectedTab)
+                            
+                            UserPropertiesTabView(state: viewModel.userPropertiesListState) {key, newVal in
+                                viewModel.send(.tappedChangePrefValue(newVal: newVal, forKey: key))
+                            }
+                            .noobTabItem(.sharedPref, selection: $selectedTab)
+                            
+                            LogsTabView(state: viewModel.logListState)
+                                .noobTabItem(.logs, selection: $selectedTab)
+                            
+                            MoreTabView(sendAction: viewModel.send)
+                                .noobTabItem(.more, selection: $selectedTab)
                         }
-                        .noobTabItem(.api, selection: $selectedTab)
-                        
-                        UserPropertiesTabView(state: viewModel.userPropertiesListState) {key, newVal in
-                            viewModel.send(.tappedChangePrefValue(newVal: newVal, forKey: key))
+                        .padding(.bottom, proxy.safeAreaInsets.bottom == 0 ? 10 : 0)
+                        .onAppear {
+                            viewModel.send(.revertSearchQuery)
                         }
-                        .noobTabItem(.sharedPref, selection: $selectedTab)
+                        .transition(.move(edge: .leading))
                         
-                        LogsTabView(state: viewModel.logListState)
-                            .noobTabItem(.logs, selection: $selectedTab)
-                        
-                        MoreTabView(sendAction: viewModel.send)
-                            .noobTabItem(.more, selection: $selectedTab)
                     }
-                    .onAppear {
-                        viewModel.send(.revertSearchQuery)
-                    }
-                    .transition(.move(edge: .leading))
                     
                 }
-                
+                .navigationBarHidden(true)
             }
-            .navigationBarHidden(true)
         }
         .colorScheme(.light)
     }

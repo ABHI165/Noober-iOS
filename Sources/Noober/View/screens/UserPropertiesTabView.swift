@@ -5,19 +5,14 @@ struct UserPropertiesTabView: View {
     let didTappedSave: (String, String) -> Void
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(state, id: \.key) { state in
-                    UserPropertiesCell(state: state, didTappedSave: didTappedSave)
-                }
+        List {
+            ForEach(state, id: \.key) { state in
+                UserPropertiesCell(state: state, didTappedSave: didTappedSave)
             }
-            .listStyle(.plain)
-            
-            Spacer()
-                .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-            
         }
+        .listStyle(.plain)
         .frame(maxHeight: .infinity, alignment: .top)
+        .padding(.bottom, 50)
     }
 }
 

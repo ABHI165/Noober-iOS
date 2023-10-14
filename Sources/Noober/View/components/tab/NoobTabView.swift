@@ -23,7 +23,6 @@ struct NoobTabView<Content: View>: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             content
-                .edgesIgnoringSafeArea(.bottom)
             NoobTabFooterView(tabs: tabs, selected: $selection)
         }
         .onPreferenceChange(NoobTabPrefrenceKey.self) { value in
