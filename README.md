@@ -3,8 +3,9 @@
 
 Noober 2.0 is a powerful debugging library designed specifically for iOS. It allows you to track network requests, log custom events, and share user properties via deep links. This version is built exclusively for iOS, ensuring seamless integration and debugging capabilities for your iOS projects. ![](https://img.shields.io/badge/iOS-black.svg?style=for-the-badge&logo=apple)
 
-> [!WARNING]  
-> Noober is designed for debugging purposes only. Make sure to use `#if DEBUG` when using Noober APIs in your production code.
+> [!NOTE]  
+> [Check out](https://github.com/ABHI165/Noober-2.0/) the Noober library, built with Kotlin Multiplatform (KMM) to provide cross-platform functionality for both Android and iOS native projects. While the library itself is written in KMM, it's designed to be seamlessly integrated into both Android and iOS applications for debugging purposes. I am also actively working on developing a native Android version of Noober, so stay tuned for updates!
+
 
 ## Table of Contents
 - [🚀 Noober 2.0 - Debugging Library for iOS](#-noober-20---debugging-library-for-ios)
@@ -42,13 +43,11 @@ Step 2: Enter the repository URL for Noober 2.0.
 
 That's it! Noober 2.0 will be added to your iOS project, allowing you to enjoy the benefits of iOS-specific debugging.
 
-> [!NOTE]  
-> [Check out](https://github.com/ABHI165/Noober-2.0/) the Noober library, built with Kotlin Multiplatform (KMM) to provide cross-platform functionality for both Android and iOS native projects. While the library itself is written in KMM, it's designed to be seamlessly integrated into both Android and iOS applications for debugging purposes. I am also actively working on developing a native Android version of Noober, so stay tuned for updates!
-
-
     
 ## 🚀 Initialization
 
+> [!WARNING]  
+> Noober is designed for debugging purposes only. Make sure to use `#if DEBUG` when using Noober APIs in your production code.
 
 In your AppDelegate:
 
